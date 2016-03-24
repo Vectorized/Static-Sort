@@ -20,7 +20,7 @@ Benchmarks
 Here are the number of milliseconds taken to sort 1 million arrays of ints.  
 Compiled with clang -O3, a Macbook Air (Mid-2012) Intel i7-3667U 2GHz.
 
-![Timings](https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings.png =580) 
+<img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings.png" alt="C++ Templated Bose-Nelson Static Sort Timings" style="width: 580px;"/>
 
 Here are the average clocks per sort against other static sorts from   
 [http://stackoverflow.com/questions/2786899/fastest-sort-of-fixed-length-6-int-array]   
