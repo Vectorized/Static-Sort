@@ -39,7 +39,7 @@ Here are the average clocks per sort against other static sorts from
 	Sorting Networks 12 with Fast Swap      : 32.06
 	Sorting Networks 12 reordered Swap      : 29.74
 	Reordered Sorting Network w/ fast swap  : 25.28
-	Templated Sorting Network (this class)  : 25.01
+	Templated Bose-Nelson Sorting Network   : 25.01 (This class)
 	
 	Intel Compiler 16.0 -O3 :
 	------------------------
@@ -54,7 +54,7 @@ Here are the average clocks per sort against other static sorts from
 	Sorting Networks 12 with Fast Swap      : 40.88
 	Sorting Networks 12 reordered Swap      : 37.44
 	Reordered Sorting Network w/ fast swap  : 26.25
-	Templated Sorting Network (this class)  : 29.58
+	Templated Bose-Nelson Sorting Network   : 29.58 (This class)
 
 References
 ----------
