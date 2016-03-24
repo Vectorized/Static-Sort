@@ -7,8 +7,20 @@ Uses templates to generate a Bose-Nelson sorting network on compile time.
 To enable the magic to happen, please turn on optimizations. =)  
 (-O2 or -O3 depending on your compiler)
 
+How To Use
+----------
+
+Simply `static_sort.h` into your project and `#include` it. =)  
+
+You can also copy and paste the code from `static_sort.h` directly!   
+
 Benchmarks
 ----------
+
+Here are the number of milliseconds taken to sort 1 million arrays of ints.  
+Compiled with clang -O3, a Macbook Air (Mid-2012) Intel i7-3667U 2GHz.
+
+![Timings](https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings.png) 
 
 Here are the average clocks per sort against other static sorts from   
 [http://stackoverflow.com/questions/2786899/fastest-sort-of-fixed-length-6-int-array]   
