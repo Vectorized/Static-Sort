@@ -288,7 +288,7 @@ d[i+3], d[i+4], d[i+5]); \
 	TEST(sorting_network_v3,      "Sorting Networks 12 with Fast Swap     ");
 	TEST(sorting_network_v4,      "Sorting Networks 12 reordered Swap     ");
 	TEST(fast_network,            "Reordered Sorting Network w/ fast swap ");
-	TEST(templated_static_sort,   "Templated Storing Network              ");
+	TEST(templated_static_sort,   "Templated Sorting Network              ");
 	
 	return 0;
 	
