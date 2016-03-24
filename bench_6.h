@@ -260,21 +260,21 @@ void ran_fill(int n, int *a) {
 int main(){
 	
 #define TEST(variant, description) {\
-int i;\
-int d[6*NTESTS];\
-ran_fill(6*NTESTS, d);\
-unsigned long long cycles = rdtsc();\
-for (i = 0; i < 6*NTESTS ; i+=6){\
-sort6_##variant(d+i);\
-}\
-cycles = rdtsc() - cycles;\
-printf(description " : %.2lf\n", (double)cycles/(double)NTESTS);\
-for (i = 0; i < 6*NTESTS ; i+=6) { \
-if (d[i+0] > d[i+1] || d[i+1] > d[i+2] || d[i+2] > d[i+3] || d[i+3] > d[i+4] || d[i+4] > d[i+5]) \
-printf("d%d : %d %d %d %d %d %d\n", i, \
-d[i+0], d[i+1], d[i+2], \
-d[i+3], d[i+4], d[i+5]); \
-} \
+	int i;\
+	int d[6*NTESTS];\
+	ran_fill(6*NTESTS, d);\
+	unsigned long long cycles = rdtsc();\
+	for (i = 0; i < 6*NTESTS ; i+=6){\
+		sort6_##variant(d+i);\
+	}\
+	cycles = rdtsc() - cycles;\
+	printf(description " : %.2lf\n", (double)cycles/(double)NTESTS);\
+	for (i = 0; i < 6*NTESTS ; i+=6) { \
+		if (d[i+0] > d[i+1] || d[i+1] > d[i+2] || d[i+2] > d[i+3] || d[i+3] > d[i+4] || d[i+4] > d[i+5]) \
+		printf("d%d : %d %d %d %d %d %d\n", i, \
+		d[i+0], d[i+1], d[i+2], \
+		d[i+3], d[i+4], d[i+5]); \
+	} \
 }
 	StaticSort<6, int> sort6_templated_static_sort;
 	TEST(libqsort,                "Direct call to qsort library function  ");

@@ -10,6 +10,7 @@
  * compile time generated Bose-Nelson sorting network.
  * \tparam NumElements  The number of elements in the array or container to sort.
  * \tparam T            The element type.
+ * \tparam Compare      A comparator functor class that returns true if lhs < rhs.
  */
 template <unsigned NumElements, class T, class Compare = void> class StaticSort
 {
@@ -82,7 +83,7 @@ public:
 	 * Sorts the array/container arr.
 	 * \param  arr  The array/container to be sorted.
 	 */
-	template <class Container> inline void operator() (Container &arr)
+	template <class Container> inline void operator() (Container &arr) const
 	{
 		PS<Container, Compare, 1, NumElements, (NumElements <= 1)> ps(arr);
 	};
@@ -91,7 +92,7 @@ public:
 	 * Sorts the array arr.
 	 * \param  arr  The array to be sorted.
 	 */
-	inline void operator() (T *arr)
+	inline void operator() (T *arr) const
 	{
 		PS<T*, Compare, 1, NumElements, (NumElements <= 1)> ps(arr);
 	};

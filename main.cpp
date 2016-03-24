@@ -1,6 +1,9 @@
-//#define BENCH
-#ifdef BENCH
-#include "bench.h"
+#define BENCH_N
+
+#if defined(BENCH_6)
+	#include "bench_6.h"
+#elif defined(BENCH_N)
+	#include "bench_n.h"
 #else
 
 #include "static_sort.h"
