@@ -9,10 +9,12 @@
  */
 
 
-//#define BENCH_N
+//#define BENCH_6
 
 #if defined(BENCH_6)
 	#include "bench_6.h"
+#elif defined(BENCH_10)
+	#include "bench_10.h"
 #elif defined(BENCH_N)
 	#include "bench_n.h"
 #else

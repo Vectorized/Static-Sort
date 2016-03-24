@@ -29,6 +29,7 @@
 		CEFDE9DD1CA43F4A00A66716 /* static_sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_sort.h; sourceTree = "<group>"; };
 		CEFDE9DF1CA452E500A66716 /* bench_n.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bench_n.h; sourceTree = "<group>"; };
 		CEFDE9E01CA465F300A66716 /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
+		CEFDE9E11CA47EC500A66716 /* bench_10.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bench_10.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +48,7 @@
 			children = (
 				CEFDE9DB1CA43F4A00A66716 /* bench_6.h */,
 				CEFDE9DF1CA452E500A66716 /* bench_n.h */,
+				CEFDE9E11CA47EC500A66716 /* bench_10.h */,
 				CEFDE9E01CA465F300A66716 /* timer.h */,
 				CEFDE9DC1CA43F4A00A66716 /* main.cpp */,
 				CEFDE9DD1CA43F4A00A66716 /* static_sort.h */,
