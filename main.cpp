@@ -1,4 +1,4 @@
-#define BENCH_N
+//#define BENCH_N
 
 #if defined(BENCH_6)
 	#include "bench_6.h"
