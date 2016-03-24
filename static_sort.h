@@ -24,25 +24,25 @@
  */
 template <unsigned NumElements, class T, class Compare = void> class StaticSort
 {
-	template <class A, int I0, int I1, class C> struct Swap
+	template <class A, class C> struct Swap
 	{
-		inline Swap(A &a)
+		inline Swap(A &a, int i0, int i1)
 		{
-			enum { J0 = I0 - 1, J1 = I1 - 1 };
-			T t = Compare()(a[J0], a[J1]) ? a[J0] : a[J1]; // Min
-			a[J1] = Compare()(a[J0], a[J1]) ? a[J1] : a[J0]; // Max
-			a[J0] = t;
+			T t = Compare()(a[i0], a[i1]) ? a[i0] : a[i1]; // Min
+			a[i1] = Compare()(a[i0], a[i1]) ? a[i1] : a[i0]; // Max
+			a[i0] = t;
 		}
 	};
 	
-	template <class A, int I0, int I1> struct Swap <A, I0, I1, void>
+	template <class A> struct Swap <A, void>
 	{
-		inline Swap(A &a)
+		inline Swap(A &a, int i0, int i1)
 		{
-			enum { J0 = I0 - 1, J1 = I1 - 1 };
-			T t = a[J0] < a[J1] ? a[J0] : a[J1]; // Min
-			a[J1] = a[J0] < a[J1] ? a[J1] : a[J0]; // Max
-			a[J0] = t;
+			// Explicitly code out the Min and Max to nudge the compiler
+			// to generate branchless code.
+			T t = a[i0] < a[i1] ? a[i0] : a[i1]; // Min
+			a[i1] = a[i0] < a[i1] ? a[i1] : a[i0]; // Max
+			a[i0] = t;
 		}
 	};
 	
@@ -59,17 +59,17 @@ template <unsigned NumElements, class T, class Compare = void> class StaticSort
 	
 	template <class A, class C, int I, int J> struct PB <A, C, I, J, 1, 1>
 	{
-		inline PB(A &a) { Swap<A, I, J, C> s(a); }
+		inline PB(A &a) { Swap<A, C> s(a, I - 1, J - 1); }
 	};
 	
 	template <class A, class C, int I, int J> struct PB <A, C, I, J, 1, 2>
 	{
-		inline PB(A &a) { Swap<A, I, J + 1, C> s0(a); Swap<A, I, J, C> s1(a); }
+		inline PB(A &a) { Swap<A, C> s0(a, I - 1, J); Swap<A, C> s1(a, I - 1, J - 1); }
 	};
 	
 	template <class A, class C, int I, int J> struct PB <A, C, I, J, 2, 1>
 	{
-		inline PB(A &a) { Swap<A, I, J, C> s0(a); Swap<A, I + 1, J, C> s1(a); }
+		inline PB(A &a) { Swap<A, C> s0(a, I - 1, J - 1); Swap<A, C> s1(a, I, J - 1); }
 	};
 	
 	template <class A, class C, int I, int M, bool Stop = false> struct PS
