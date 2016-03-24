@@ -1,7 +1,17 @@
+/*
+ Copyright (c) 2016 Kang Yue Sheng Benjamin
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 #ifndef static_sort_h
 #define static_sort_h
 /*
- Modified from the Bose-Nelson Sorting network code from:
+ Adapted from the Bose-Nelson Sorting network code from:
  https://github.com/atinm/bose-nelson/blob/master/bose-nelson.c
  */
 
@@ -19,8 +29,8 @@ template <unsigned NumElements, class T, class Compare = void> class StaticSort
 		inline Swap(A &a)
 		{
 			enum { J0 = I0 - 1, J1 = I1 - 1 };
-			T t = Compare()(a[J0], a[J1]) ? a[J0] : a[J1];
-			a[J1] = Compare()(a[J0], a[J1]) ? a[J1] : a[J0];
+			T t = Compare()(a[J0], a[J1]) ? a[J0] : a[J1]; // Min
+			a[J1] = Compare()(a[J0], a[J1]) ? a[J1] : a[J0]; // Max
 			a[J0] = t;
 		}
 	};
@@ -30,8 +40,8 @@ template <unsigned NumElements, class T, class Compare = void> class StaticSort
 		inline Swap(A &a)
 		{
 			enum { J0 = I0 - 1, J1 = I1 - 1 };
-			T t = a[J0] < a[J1] ? a[J0] : a[J1];
-			a[J1] = a[J0] < a[J1] ? a[J1] : a[J0];
+			T t = a[J0] < a[J1] ? a[J0] : a[J1]; // Min
+			a[J1] = a[J0] < a[J1] ? a[J1] : a[J0]; // Max
 			a[J0] = t;
 		}
 	};
