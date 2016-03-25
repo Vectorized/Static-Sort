@@ -79,7 +79,7 @@ int main(int argc, const char * argv[])
 		Timer timer;
 		timer.start();
 		
-		StaticSort<10, int> staticSort;
+		StaticSort<10> staticSort;
 		
 		for (unsigned i = 0; i < TotalElements; i += NumElements)
 			staticSort(data + i);

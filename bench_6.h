@@ -276,7 +276,7 @@ int main(){
 		d[i+3], d[i+4], d[i+5]); \
 	} \
 }
-	StaticSort<6, int> sort6_templated_static_sort;
+	StaticSort<6> sort6_templated_static_sort;
 	TEST(libqsort,                "Direct call to qsort library function  ");
 	TEST(insertion_sort_v1,       "Naive implementation (insertion sort)  ");
 	TEST(insertion_sort_v2,       "Insertion Sort (Daniel Stutzbach)      ");

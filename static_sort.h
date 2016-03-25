@@ -10,6 +10,7 @@
 
 #ifndef static_sort_h
 #define static_sort_h
+
 /*
  Adapted from the Bose-Nelson Sorting network code from:
  https://github.com/atinm/bose-nelson/blob/master/bose-nelson.c
@@ -22,28 +23,32 @@
  * \tparam T            The element type.
  * \tparam Compare      A comparator functor class that returns true if lhs < rhs.
  */
-template <unsigned NumElements, class T, class Compare = void> class StaticSort
+template <unsigned NumElements, class Compare = void> class StaticSort
 {
 	template <class A, class C> struct Swap
 	{
-		inline Swap(A &a, int i0, int i1)
+		template <class T> inline void s(T &v0, T &v1)
 		{
-			T t = Compare()(a[i0], a[i1]) ? a[i0] : a[i1]; // Min
-			a[i1] = Compare()(a[i0], a[i1]) ? a[i1] : a[i0]; // Max
-			a[i0] = t;
+			T t = Compare()(v0, v1) ? v0 : v1; // Min
+			v1 = Compare()(v0, v1) ? v1 : v0; // Max
+			v0 = t;
 		}
+		
+		inline Swap(A &a, int i0, int i1) { s(a[i0], a[i1]); }
 	};
 	
 	template <class A> struct Swap <A, void>
 	{
-		inline Swap(A &a, int i0, int i1)
+		template <class T> inline void s(T &v0, T &v1)
 		{
 			// Explicitly code out the Min and Max to nudge the compiler
 			// to generate branchless code.
-			T t = a[i0] < a[i1] ? a[i0] : a[i1]; // Min
-			a[i1] = a[i0] < a[i1] ? a[i1] : a[i0]; // Max
-			a[i0] = t;
+			T t = v0 < v1 ? v0 : v1; // Min
+			v1 = v0 < v1 ? v1 : v0; // Max
+			v0 = t;
 		}
+		
+		inline Swap(A &a, int i0, int i1) { s(a[i0], a[i1]); }
 	};
 	
 	template <class A, class C, int I, int J, int X, int Y> struct PB
@@ -89,6 +94,7 @@ template <unsigned NumElements, class T, class Compare = void> class StaticSort
 	};
 	
 public:
+	
 	/**
 	 * Sorts the array/container arr.
 	 * \param  arr  The array/container to be sorted.
@@ -102,7 +108,7 @@ public:
 	 * Sorts the array arr.
 	 * \param  arr  The array to be sorted.
 	 */
-	inline void operator() (T *arr) const
+	template <class T> inline void operator() (T *arr) const
 	{
 		PS<T*, Compare, 1, NumElements, (NumElements <= 1)> ps(arr);
 	};

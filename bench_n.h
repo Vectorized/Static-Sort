@@ -73,10 +73,10 @@ public:
 	};
 };
 
-template <unsigned NumElements, class T, class Compare = void> class StaticInsertionSort
+template <unsigned NumElements> class StaticInsertionSort
 {
 public:
-	inline void operator() (T *arr) const
+	template <class T> inline void operator() (T *arr) const
 	{
 		for (unsigned i = 1; i < NumElements; ++i) {
 			T value = arr[i];
@@ -93,10 +93,10 @@ public:
 	};
 };
 
-template <unsigned NumElements, class T, class Compare = void> class STLSort
+template <unsigned NumElements> class STLSort
 {
 public:
-	inline void operator() (T *arr) const
+	template <class T> inline void operator() (T *arr) const
 	{
 		std::sort(arr, arr + NumElements);
 	};
@@ -107,21 +107,20 @@ public:
 	};
 };
 
-template <unsigned NumTests, unsigned NumElements> struct Test
+template <unsigned NumTests, class Number, unsigned NumElements = 2> struct Test
 {
-	template <class T> static inline void fill(int n, T *a)
+	static inline void fill(int n, Number *a)
 	{
 		static int seed = 76521;
 		while (n--) *a++ = (seed = seed * 1812433253 + 12345);
 	}
 	
-	template <class T, class Compare, template <unsigned, class, class> class Sort>
-	inline void test(const Sort<NumElements, T, Compare> &sort,
-					   const std::string &description)
+	template <typename Sort>
+	inline void test(const Sort &sort, const std::string &description)
 	{
 		enum { TotalElements = NumElements * NumTests };
 		
-		T *data = new T[TotalElements];
+		Number *data = new Number[TotalElements];
 		
 		fill(TotalElements, data);
 		
@@ -161,21 +160,20 @@ template <unsigned NumTests, unsigned NumElements> struct Test
 	
 	Test()
 	{
-		typedef int Number;
 		std::cout << NumElements << " Elements: \n";
-		test(StaticSort<NumElements, Number>(),
+		test(StaticSort<NumElements>(),
 			 "\tTemplated Bose-Nelson Sorting Network ");
 		test(StaticRankOrderSort<NumElements, Number>(),
 			 "\tTemplated Rank Order                  ");
-		test(StaticInsertionSort<NumElements, Number>(),
+		test(StaticInsertionSort<NumElements>(),
 			 "\tTemplated Insertion Sort              ");
-		test(STLSort<NumElements, Number>(),
+		test(STLSort<NumElements>(),
 			 "\tSTL Sort                              ");
-		Test<NumTests, NumElements + 1> ();
+		Test<NumTests, Number, NumElements + 1> ();
 	}
 };
 
-template <unsigned NumTests> struct Test <NumTests, 33> {};
+template <unsigned NumTests, class Number> struct Test <NumTests, Number, 8> {};
 
 int main(int argc, const char * argv[])
 {
@@ -183,7 +181,7 @@ int main(int argc, const char * argv[])
 	
 	std::cout << "Milliseconds taken to sort " << NumTests << " arrays." << std::endl;
 	
-	Test<NumTests, 2> t;
+	Test<NumTests, int> t;
 	
 	return 0;
 }

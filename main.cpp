@@ -9,7 +9,7 @@
  */
 
 
-//#define BENCH_N
+#define BENCH_10
 
 #if defined(BENCH_6)
 	#include "bench_6.h"
@@ -35,7 +35,7 @@ int main(int argc, const char * argv[])
 		std::cout << "Before Sort: \t";
 		for (int i = 0; i < NumValues; ++i) std::cout << rands[i] << " ";
 		std::cout << "\n";
-		StaticSort<NumValues, int> staticSort;
+		StaticSort<NumValues> staticSort;
 		staticSort(rands);
 		std::cout << "After Sort: \t";
 		for (int i = 0; i < NumValues; ++i) std::cout << rands[i] << " ";
@@ -51,7 +51,7 @@ int main(int argc, const char * argv[])
 		std::cout << "Before Sort: \t";
 		for (int i = 0; i < NumValues; ++i) std::cout << rands[i] << " ";
 		std::cout << "\n";
-		StaticSort<NumValues, int> staticSort;
+		StaticSort<NumValues> staticSort;
 		staticSort(rands);
 		std::cout << "After Sort: \t";
 		for (int i = 0; i < NumValues; ++i) std::cout << rands[i] << " ";
