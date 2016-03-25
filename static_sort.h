@@ -34,7 +34,7 @@ template <unsigned NumElements, class Compare = void> class StaticSort
 			v0 = t;
 		}
 		
-		inline Swap(A &a, int i0, int i1) { s(a[i0], a[i1]); }
+		inline Swap(A &a, const int &i0, const int &i1) { s(a[i0], a[i1]); }
 	};
 	
 	template <class A> struct Swap <A, void>
@@ -48,7 +48,7 @@ template <unsigned NumElements, class Compare = void> class StaticSort
 			v0 = t;
 		}
 		
-		inline Swap(A &a, int i0, int i1) { s(a[i0], a[i1]); }
+		inline Swap(A &a, const int &i0, const int &i1) { s(a[i0], a[i1]); }
 	};
 	
 	template <class A, class C, int I, int J, int X, int Y> struct PB
