@@ -94,7 +94,6 @@ template <unsigned NumElements, class Compare = void> class StaticSort
 	};
 	
 public:
-	
 	/**
 	 * Sorts the array/container arr.
 	 * \param  arr  The array/container to be sorted.
