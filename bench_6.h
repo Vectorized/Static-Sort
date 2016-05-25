@@ -81,6 +81,51 @@ static inline void sort6_insertion_sort_unrolled(int *d){
 }
 
 
+/*
+ * Insertion Sort Unrolled by Glenn Teitelbaum
+ * http://stackoverflow.com/a/37425193/3686594
+ */
+
+template <class T, int NUM> class insert_sort;
+
+template <class T>
+class insert_sort<T,0>
+// stop template recursion
+// sorting 1 item is a no-op
+{
+public:
+	static void place(T *x) {}
+	static void sort(T * x) {}
+};
+
+template <class T, int NUM>
+class insert_sort
+// use template recursion to do insertion sort
+// NUM is the index of the last item, eg. for x[10] call <9>
+{
+public:
+	static void place(T *x)
+	{
+		T t1=x[NUM-1];
+		T t2=x[NUM];
+		if (t1 > t2)
+		{
+			x[NUM-1]=t2;
+			x[NUM]=t1;
+			insert_sort<T, NUM-1>::place(x);
+		}
+	}
+	static void sort(T * x)
+	{
+		insert_sort<T, NUM-1>::sort(x); // sort everything before
+		place(x);                    // put this item in
+	}
+};
+
+static inline void sort6_insertion_sort_unrolled_2(int *d){
+	insert_sort<int, 5>::sort(d);
+}
+
 static inline void sort6_sorting_network_v1(int * d){
 #define SWAP(x,y) if (d[y] < d[x]) { int tmp = d[x]; d[x] = d[y]; d[y] = tmp; }
 	SWAP(1, 2);
@@ -277,18 +322,19 @@ int main(){
 	} \
 }
 	StaticSort<6> sort6_templated_static_sort;
-	TEST(libqsort,                "Direct call to qsort library function  ");
-	TEST(insertion_sort_v1,       "Naive implementation (insertion sort)  ");
-	TEST(insertion_sort_v2,       "Insertion Sort (Daniel Stutzbach)      ");
-	TEST(insertion_sort_unrolled, "Insertion Sort Unrolled                ");
-	TEST(rank_order,              "Rank Order                             ");
-	TEST(rank_order_reg,          "Rank Order with registers              ");
-	TEST(sorting_network_v1,      "Sorting Networks (Daniel Stutzbach)    ");
-	TEST(sorting_network_v2,      "Sorting Networks (Paul R)              ");
-	TEST(sorting_network_v3,      "Sorting Networks 12 with Fast Swap     ");
-	TEST(sorting_network_v4,      "Sorting Networks 12 reordered Swap     ");
-	TEST(fast_network,            "Reordered Sorting Network w/ fast swap ");
-	TEST(templated_static_sort,   "Templated Sorting Network (this class) ");
+	TEST(libqsort,                  "Direct call to qsort library function      ");
+	TEST(insertion_sort_v1,         "Naive implementation (insertion sort)      ");
+	TEST(insertion_sort_v2,         "Insertion Sort (Daniel Stutzbach)          ");
+	TEST(insertion_sort_unrolled,   "Insertion Sort Unrolled                    ");
+	TEST(insertion_sort_unrolled_2, "Insertion Sort Unrolled (Glenn Teitelbaum) ");
+	TEST(rank_order,                "Rank Order                                 ");
+	TEST(rank_order_reg,            "Rank Order with registers                  ");
+	TEST(sorting_network_v1,        "Sorting Networks (Daniel Stutzbach)        ");
+	TEST(sorting_network_v2,        "Sorting Networks (Paul R)                  ");
+	TEST(sorting_network_v3,        "Sorting Networks 12 with Fast Swap         ");
+	TEST(sorting_network_v4,        "Sorting Networks 12 reordered Swap         ");
+	TEST(fast_network,              "Reordered Sorting Network w/ fast swap     ");
+	TEST(templated_static_sort,     "Templated Sorting Network (this class)     ");
 	
 	return 0;
 	

@@ -28,33 +28,35 @@ Here are the average clocks per sort against other static sorts from
 
 	Clang -O3 :
 	----------
-	Direct call to qsort library function   : 342.26
-	Naive implementation (insertion sort)   : 136.76
-	Insertion Sort (Daniel Stutzbach)       : 101.37
-	Insertion Sort Unrolled                 : 110.27
-	Rank Order                              : 90.88
-	Rank Order with registers               : 90.29
-	Sorting Networks (Daniel Stutzbach)     : 93.66
-	Sorting Networks (Paul R)               : 31.54
-	Sorting Networks 12 with Fast Swap      : 32.06
-	Sorting Networks 12 reordered Swap      : 29.74
-	Reordered Sorting Network w/ fast swap  : 25.28
-	Templated Bose-Nelson Sorting Network   : 25.01 (This class)
+	Direct call to qsort library function       : 326.81
+	Naive implementation (insertion sort)       : 132.98
+	Insertion Sort (Daniel Stutzbach)           : 104.04
+	Insertion Sort Unrolled                     : 99.64
+	Insertion Sort Unrolled (Glenn Teitelbaum)  : 81.55
+	Rank Order                                  : 44.01
+	Rank Order with registers                   : 42.40
+	Sorting Networks (Daniel Stutzbach)         : 88.06
+	Sorting Networks (Paul R)                   : 31.64
+	Sorting Networks 12 with Fast Swap          : 29.68
+	Sorting Networks 12 reordered Swap          : 28.61
+	Reordered Sorting Network w/ fast swap      : 24.63
+	Templated Sorting Network (this class)      : 25.37
 	
 	Intel Compiler 16.0 -O3 :
 	------------------------
-	Direct call to qsort library function   : 344.51
-	Naive implementation (insertion sort)   : 100.48
-	Insertion Sort (Daniel Stutzbach)       : 102.27
-	Insertion Sort Unrolled                 : 91.09
-	Rank Order                              : 41.56
-	Rank Order with registers               : 36.33
-	Sorting Networks (Daniel Stutzbach)     : 89.72
-	Sorting Networks (Paul R)               : 43.71
-	Sorting Networks 12 with Fast Swap      : 40.88
-	Sorting Networks 12 reordered Swap      : 37.44
-	Reordered Sorting Network w/ fast swap  : 26.25
-	Templated Bose-Nelson Sorting Network   : 29.58 (This class)
+	Direct call to qsort library function       : 325.28
+	Naive implementation (insertion sort)       : 97.38
+	Insertion Sort (Daniel Stutzbach)           : 108.97
+	Insertion Sort Unrolled                     : 97.16
+	Insertion Sort Unrolled (Glenn Teitelbaum)  : 109.65
+	Rank Order                                  : 38.13
+	Rank Order with registers                   : 32.96
+	Sorting Networks (Daniel Stutzbach)         : 85.56
+	Sorting Networks (Paul R)                   : 47.57
+	Sorting Networks 12 with Fast Swap          : 41.13
+	Sorting Networks 12 reordered Swap          : 37.42
+	Reordered Sorting Network w/ fast swap      : 25.60
+	Templated Sorting Network (this class)      : 29.09
 
 References
 ----------
