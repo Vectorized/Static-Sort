@@ -73,7 +73,7 @@ public:
 	};
 };
 
-template <unsigned NumElements> class StaticInsertionSort
+template <unsigned NumElements> class InsertionSort
 {
 public:
 	template <class T> inline void operator() (T *arr) const
@@ -90,6 +90,60 @@ public:
 	template <class Container> inline void operator() (Container &arr) const
 	{
 		operator()(&arr[0]);
+	};
+};
+
+/*
+ * Insertion Sort Unrolled by Glenn Teitelbaum
+ * http://stackoverflow.com/a/37425193/3686594
+ */
+
+template <unsigned NumElements, class _T> struct InsertionSortUnrolled
+{
+	template <class T, int NUM> class insert_sort;
+	
+	template <class T>
+	class insert_sort<T,0>
+	// stop template recursion
+	// sorting 1 item is a no-op
+	{
+	public:
+		static void place(T *x) {}
+		static void sort(T * x) {}
+	};
+	
+	template <class T, int NUM>
+	class insert_sort
+	// use template recursion to do insertion sort
+	// NUM is the index of the last item, eg. for x[10] call <9>
+	{
+	public:
+		static void place(T *x)
+		{
+			T t1=x[NUM-1];
+			T t2=x[NUM];
+			if (t1 > t2)
+			{
+				x[NUM-1]=t2;
+				x[NUM]=t1;
+				insert_sort<T, NUM-1>::place(x);
+			}
+		}
+		static void sort(T * x)
+		{
+			insert_sort<T, NUM-1>::sort(x); // sort everything before
+			place(x);                    // put this item in
+		}
+	};
+	
+	template <class T> inline void operator() (T *arr) const
+	{
+		insert_sort<_T, NumElements-1>::sort(arr);
+	};
+	
+	template <class Container> inline void operator() (Container &arr) const
+	{
+		insert_sort<_T, NumElements-1>::sort(arr);
 	};
 };
 
@@ -165,15 +219,17 @@ template <unsigned NumTests, class Number, unsigned NumElements = 2> struct Test
 			 "\tTemplated Bose-Nelson Sorting Network ");
 		test(StaticRankOrderSort<NumElements, Number>(),
 			 "\tTemplated Rank Order                  ");
-		test(StaticInsertionSort<NumElements>(),
+		test(InsertionSort<NumElements>(),
 			 "\tTemplated Insertion Sort              ");
+		test(InsertionSortUnrolled<NumElements, Number>(),
+			 "\tTemplated Insertion Sort Unrolled     ");
 		test(STLSort<NumElements>(),
 			 "\tSTL Sort                              ");
 		Test<NumTests, Number, NumElements + 1> ();
 	}
 };
 
-template <unsigned NumTests, class Number> struct Test <NumTests, Number, 8> {};
+template <unsigned NumTests, class Number> struct Test <NumTests, Number, 33> {};
 
 int main(int argc, const char * argv[])
 {
