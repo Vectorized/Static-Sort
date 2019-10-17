@@ -10,9 +10,25 @@ To enable the magic to happen, please turn on optimizations. =)
 How To Use
 ----------
 
-Simply `static_sort.h` into your project and `#include` it. =)  
+Just copy `static_sort.h` into your project and `#include` it. =)  
 
-You can also copy and paste the code from `static_sort.h` directly!   
+You can also copy and paste the code from `static_sort.h` directly!  
+
+```
+StaticSort<10> sort;
+int a[10] = {6,7,3,2,4,0,9,1,8,5};
+sort(a);
+``` 
+
+Works on std::vectors, plain old arrays, or other array-like objects.  
+
+Accepts custom less than comparator.
+
+
+Requirements
+------------
+
+A C++98 and above compiler.
 
 Benchmarks
 ----------
@@ -20,17 +36,22 @@ Benchmarks
 Here are the number of milliseconds taken to sort 1 million arrays of ints.  
 Compiled with clang -O3, a Macbook Air (Mid-2012) Intel i7-3667U 2GHz.
 
-**Random Order**
+**Random Order**  
+`6,7,3,2,4,0,9,1,8,5` -> `0,1,2,3,4,5,6,7,8,9` 
 
 <img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n_random.png" alt="Sort Timings (Random)" width="680"/>
 
-**Reversed Order**
+**Reversed Order**  
+`9,8,7,6,5,4,3,2,1,0` -> `0,1,2,3,4,5,6,7,8,9` 
 
 <img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n_reversed.png" alt="Sort Timings (Reversed)" width="680"/>
 
-**In Order**
+**In Order**  
+`0,1,2,3,4,5,6,7,8,9` -> `0,1,2,3,4,5,6,7,8,9` 
 
 <img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n_ordered.png" alt="Sort Timings (Ordered)" width="680"/>
+
+For real-world data, it is recommended you use 
 
 Here are the average clocks per sort against other static sorts from   
 [http://stackoverflow.com/questions/2786899/fastest-sort-of-fixed-length-6-int-array]   
@@ -88,13 +109,7 @@ References
 - http://stackoverflow.com/questions/2786899/fastest-sort-of-fixed-length-6-int-array
 - https://github.com/atinm/bose-nelson/blob/master/bose-nelson.c
 
-License (MIT)
--------------
+License
+-------
 
-Copyright (c) 2016 Kang Yue Sheng Benjamin
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+MIT
