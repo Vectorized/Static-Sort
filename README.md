@@ -7,28 +7,38 @@ Uses templates to generate a Bose-Nelson sorting network on compile time.
 To enable the magic to happen, please turn on optimizations. =)  
 (-O2 or -O3 depending on your compiler)
 
-How To Use
-----------
+Installation
+------------
 
 Just copy `static_sort.h` into your project and `#include` it. =)  
 
 You can also copy and paste the code from `static_sort.h` directly!  
 
-```
-StaticSort<10> sort;
+Requirements
+------------
+
+A C++98 and above compiler.
+
+Usage
+-----
+
+```c++
+// Fast for small randomly ordered arrays.
+StaticSort<10> staticSort;
 int a[10] = {6,7,3,2,4,0,9,1,8,5};
-sort(a);
+staticSort(a);
+staticSort(a, std::less<int>()); // with less than comparator
+
+// Fast for small arrays. Randomly ordered, reversed, in order.
+StaticTimSort<10> staticTimSort; 
+int b[10] = {6,7,3,2,4,0,9,1,8,5};
+staticTimSort(b);
+staticTimSort(b, std::less<int>()); // with less than comparator
 ``` 
 
 Works on std::vectors, plain old arrays, or other array-like objects.  
 
 Accepts custom less than comparator.
-
-
-Requirements
-------------
-
-A C++98 and above compiler.
 
 Benchmarks
 ----------
