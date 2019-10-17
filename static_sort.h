@@ -203,7 +203,7 @@ template <unsigned NumElements> class StaticTimSort
 			
 			bool hasDecreasing = false;
 			bool hasIncreasing = false;
-			
+						
 			for (unsigned i = 1; i < NumElements; ++i) {
 				T curr = a[i];
 				if (c(curr, prev)) {
