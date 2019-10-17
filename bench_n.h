@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2016 Kang Yue Sheng Benjamin
+ Copyright (c) 2019 Kang Yue Sheng Benjamin
  
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  
@@ -13,6 +13,7 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 
 #include "timer.h"
@@ -169,29 +170,8 @@ template <unsigned NumTests, class Number, unsigned NumElements = 2> struct Test
 		while (n--) *a++ = (seed = seed * 1812433253 + 12345);
 	}
 	
-	template <typename Sort>
-	inline void test(const Sort &sort, const std::string &description)
+	inline void checkSorted(Number *data)
 	{
-		enum { TotalElements = NumElements * NumTests };
-		
-		Number *data = new Number[TotalElements];
-		
-		fill(TotalElements, data);
-		
-		Timer timer;
-		timer.start();
-		
-		for (unsigned i = 0; i < TotalElements; i += NumElements) {
-			sort(data + i);
-		}
-		
-		timer.stop();
-		
-		std::cout
-		<< description << ": "
-		<< timer.getElapsedMilliseconds()
-		<< std::endl;
-		
 		for (unsigned i = 0; i < NumTests; ++i) {
 			bool sortFailed = false;
 			for (unsigned j = 0; j < NumElements - 1 && !sortFailed; ++j) {
@@ -209,6 +189,54 @@ template <unsigned NumTests, class Number, unsigned NumElements = 2> struct Test
 				std::cout << std::endl;
 			}
 		}
+	}
+	
+	template <typename Sort>
+	inline void test(const Sort &sort, const std::string &description)
+	{
+		enum { TotalElements = NumElements * NumTests };
+		
+		Number *data = new Number[TotalElements];
+		
+		fill(TotalElements, data);
+
+		Timer timer;
+		
+		timer.start();
+		for (unsigned i = 0; i < TotalElements; i += NumElements) {
+			sort(data + i);
+		}
+		timer.stop();
+		double randomSortTime = timer.getElapsedMilliseconds();
+		checkSorted(data);
+		
+		for (unsigned i = 0; i < TotalElements; i += NumElements) {
+			std::reverse(data + i, data + i + NumElements);
+		}
+		timer.start();
+		for (unsigned i = 0; i < TotalElements; i += NumElements) {
+			sort(data + i);
+		}
+		timer.stop();
+		double reversedSortTime = timer.getElapsedMilliseconds();
+		checkSorted(data);
+		
+		timer.start();
+		for (unsigned i = 0; i < TotalElements; i += NumElements) {
+			sort(data + i);
+		}
+		timer.stop();
+		double orderedSortTime = timer.getElapsedMilliseconds();
+		checkSorted(data);
+
+		std::cout
+		<< description << ": { "
+		<< "\"random\": "   << std::setw(8) << randomSortTime   << ", "
+		<< "\"reversed\": " << std::setw(8) << reversedSortTime << ", "
+		<< "\"ordered\": "  << std::setw(8) << orderedSortTime
+		<< " }"
+		<< std::endl;
+		
 		delete [] data;
 	}
 	
@@ -216,20 +244,22 @@ template <unsigned NumTests, class Number, unsigned NumElements = 2> struct Test
 	{
 		std::cout << NumElements << " Elements: \n";
 		test(StaticSort<NumElements>(),
-			 "\tTemplated Bose-Nelson Sorting Network ");
+			 "\tTemplated Bose-Nelson Sorting Network     ");
+		test(StaticTimSort<NumElements>(),
+			 "\tTemplated Tim-Bose-Nelson Sorting Network ");
 		test(StaticRankOrderSort<NumElements, Number>(),
-			 "\tTemplated Rank Order                  ");
+			 "\tTemplated Rank Order                      ");
 		test(InsertionSort<NumElements>(),
-			 "\tTemplated Insertion Sort              ");
+			 "\tTemplated Insertion Sort                  ");
 		test(InsertionSortUnrolled<NumElements, Number>(),
-			 "\tTemplated Insertion Sort Unrolled     ");
+			 "\tTemplated Insertion Sort Unrolled         ");
 		test(STLSort<NumElements>(),
-			 "\tSTL Sort                              ");
+			 "\tSTL Sort                                  ");
 		Test<NumTests, Number, NumElements + 1> ();
 	}
 };
 
-template <unsigned NumTests, class Number> struct Test <NumTests, Number, 33> {};
+template <unsigned NumTests, class Number> struct Test <NumTests, Number, 31> {};
 
 int main(int argc, const char * argv[])
 {

@@ -20,11 +20,23 @@ Benchmarks
 Here are the number of milliseconds taken to sort 1 million arrays of ints.  
 Compiled with clang -O3, a Macbook Air (Mid-2012) Intel i7-3667U 2GHz.
 
-<img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n.png" alt="C++ Templated Bose-Nelson Static Sort Timings" width="680"/>
+**Random Order**
+
+<img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n_random.png" alt="Sort Timings (Random)" width="680"/>
+
+**Reversed Order**
+
+<img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n_reversed.png" alt="Sort Timings (Reversed)" width="680"/>
+
+**In Order**
+
+<img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n_ordered.png" alt="Sort Timings (Ordered)" width="680"/>
 
 Here are the average clocks per sort against other static sorts from   
 [http://stackoverflow.com/questions/2786899/fastest-sort-of-fixed-length-6-int-array]   
 (Lower is better)  
+
+These timings are for randomly ordered arrays.
 
 	Clang -O3 :
 	----------
@@ -57,6 +69,18 @@ Here are the average clocks per sort against other static sorts from
 	Sorting Networks 12 reordered Swap          : 37.42
 	Reordered Sorting Network w/ fast swap      : 25.60
 	Templated Sorting Network (this class)      : 29.09
+
+Change Log
+----------
+
+**17 Oct 2019**
+
+- Added argument to accept a less-than comparator.
+
+- Added a TimSort inspired Tim-Bose-Nelson sort to handle the case of already ordered arrays.  
+  This adds only a very tiny overhead, and is only activated for arrays of 8 or more elements.  
+  On average, it beats all the other sorts (except for the sorting-network) on   
+  random, in-order and reversed-order arrays. :)
 
 References
 ----------
