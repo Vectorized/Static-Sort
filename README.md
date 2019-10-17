@@ -24,16 +24,16 @@ Usage
 
 ```c++
 // Fast for small randomly ordered arrays.
-StaticSort<10> staticSort;
+StaticSort<10> boseNelsonSort;
 int a[10] = {6,7,3,2,4,0,9,1,8,5};
-staticSort(a);
-staticSort(a, std::less<int>()); // with less than comparator
+boseNelsonSort(a);
+boseNelsonSort(a, std::less<int>()); // with less than comparator
 
 // Fast for small arrays. Randomly ordered, reversed, in order.
-StaticTimSort<10> staticTimSort; 
+StaticTimSort<10> timBoseNelsonSort; 
 int b[10] = {6,7,3,2,4,0,9,1,8,5};
-staticTimSort(b);
-staticTimSort(b, std::less<int>()); // with less than comparator
+timBoseNelsonSort(b);
+timBoseNelsonSort(b, std::less<int>()); // with less than comparator
 ``` 
 
 Works on std::vectors, plain old arrays, or other array-like objects.  
