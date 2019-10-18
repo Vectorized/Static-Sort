@@ -61,7 +61,7 @@ Compiled with clang -O3, a Macbook Air (Mid-2012) Intel i7-3667U 2GHz.
 
 <img src="https://raw.githubusercontent.com/webby1111/Static-Sort/master/timings_n_ordered.png" alt="Sort Timings (Ordered)" width="680"/>
 
-For real-world data, it is recommended you use 
+For real-world data, it is recommended you use StaticTimSort. 
 
 Here are the average clocks per sort against other static sorts from   
 [http://stackoverflow.com/questions/2786899/fastest-sort-of-fixed-length-6-int-array]   
