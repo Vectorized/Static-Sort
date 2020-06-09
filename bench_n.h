@@ -243,9 +243,9 @@ template <unsigned NumTests, class Number, unsigned NumElements = 2> struct Test
 	Test()
 	{
 		std::cout << NumElements << " Elements: \n";
-		test(StaticSort<NumElements, 0>(),
+		test(StaticSort<NumElements>(),
 			 "\tTemplated Bose-Nelson Sorting Network     ");
-		test(StaticSort<NumElements, 1>(),
+		test(StaticTimSort<NumElements>(),
 			 "\tTemplated Tim-Bose-Nelson Sorting Network ");
 		test(StaticRankOrderSort<NumElements, Number>(),
 			 "\tTemplated Rank Order                      ");
