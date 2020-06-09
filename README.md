@@ -136,7 +136,7 @@ It helps me understand how it is used and plan new features.
 Change Log
 ----------
 
-**10 Oct 2020**
+**10 June 2020**
 
 - Added example for sorting pairs.
 
