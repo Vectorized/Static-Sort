@@ -101,8 +101,44 @@ These timings are for randomly ordered arrays.
 	Reordered Sorting Network w/ fast swap      : 25.60
 	Templated Sorting Network (this class)      : 29.09
 
+Notes
+-----
+
+### On Sorting Pairs
+
+If you want to sort pairs of 32-bit numbers (e.g. `std::pair<int, int>`),  
+it is recommended that you pack each pair of numbers into a single 64-bit number.  
+This will nudge the compiler to generate min/max instructions for fastest performance.  
+
+The overhead of packing and unpacking the pairs is negligible.  
+Sorting packed pairs is approximately 4-5x faster than sorting unpacked pairs.  
+
+At the time of writing, even the best modern compilers are unable to optimize this automatically.  
+
+For a simple example and benchmark, please look into `bench_pair_sort.h`.  
+
+It includes a little helper class for packing various types of 32-bit number pairs.  
+
+### For Real World Data
+
+Use StaticTimSort. 
+
+Like it?
+--------
+
+Give it a star!  
+
+Let me know if you have used this library in any of your projects.  
+
+It helps me understand how it is used and plan new features.  
+
+
 Change Log
 ----------
+
+**10 Oct 2020**
+
+- Added example for sorting pairs.
 
 **17 Oct 2019**
 
@@ -112,6 +148,7 @@ Change Log
   This adds only a very tiny overhead, and is only activated for arrays of 8 or more elements.  
   On average, it beats all the other sorts (except for the sorting-network) on   
   random, in-order and reversed-order arrays. :)
+
 
 References
 ----------

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019 Kang Yue Sheng Benjamin
+ Copyright (c) 2020 Kang Yue Sheng Benjamin
  
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  
@@ -8,14 +8,16 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#define BENCH_N
+#define BENCH_PAIR_SORT
 
 #if defined(BENCH_6)
-	#include "bench_6.h"
+#include "bench_6.h"
 #elif defined(BENCH_10)
-	#include "bench_10.h"
+#include "bench_10.h"
 #elif defined(BENCH_N)
-	#include "bench_n.h"
+#include "bench_n.h"
+#elif defined(BENCH_PAIR_SORT)
+#include "bench_pair_sort.h"
 #else
 
 #include "static_sort.h"

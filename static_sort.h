@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2016 Kang Yue Sheng Benjamin
+ Copyright (c) 2020 Kang Yue Sheng Benjamin.
  
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  
@@ -20,7 +20,6 @@
  * A Functor class to create a sort for fixed sized arrays/containers with a
  * compile time generated Bose-Nelson sorting network.
  * \tparam NumElements  The number of elements in the array or container to sort.
- * \tparam T            The element type.
  */
 template <unsigned NumElements> class StaticSort
 {
@@ -122,7 +121,7 @@ public:
 		typedef Compare & C;
 		PS<Container, C, 1, NumElements, (NumElements <= 1)> ps(arr, lt);
 	};
-
+	
 	/**
 	 * Sorts the array arr.
 	 * \param  arr     The array to be sorted.
@@ -167,7 +166,6 @@ public:
  * Inspired by TimSort, this scans through the array first.
  * It skips the sorting-network if it is strictly increasing or decreasing. ;)
  * \tparam NumElements  The number of elements in the array or container to sort.
- * \tparam T            The element type.
  */
 template <unsigned NumElements> class StaticTimSort
 {
@@ -195,7 +193,7 @@ template <unsigned NumElements> class StaticTimSort
 				}
 			}
 		}
-
+		
 		template <class T>
 		static inline bool sorted(T prev, A &a, C c)
 		{
@@ -203,7 +201,7 @@ template <unsigned NumElements> class StaticTimSort
 			
 			bool hasDecreasing = false;
 			bool hasIncreasing = false;
-						
+			
 			for (unsigned i = 1; i < NumElements; ++i) {
 				T curr = a[i];
 				if (c(curr, prev)) {
@@ -227,7 +225,7 @@ template <unsigned NumElements> class StaticTimSort
 			return false;
 		}
 	};
-
+	
 	
 	
 public:

@@ -23,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE2E5248249049CE0010CCC0 /* bench_pair_sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bench_pair_sort.h; sourceTree = "<group>"; };
 		CEFDE9CF1CA43A7800A66716 /* Static Sort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Static Sort"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFDE9DB1CA43F4A00A66716 /* bench_6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bench_6.h; sourceTree = "<group>"; };
 		CEFDE9DC1CA43F4A00A66716 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 				CEFDE9DB1CA43F4A00A66716 /* bench_6.h */,
 				CEFDE9DF1CA452E500A66716 /* bench_n.h */,
 				CEFDE9E11CA47EC500A66716 /* bench_10.h */,
+				CE2E5248249049CE0010CCC0 /* bench_pair_sort.h */,
 				CEFDE9E01CA465F300A66716 /* timer.h */,
 				CEFDE9DC1CA43F4A00A66716 /* main.cpp */,
 				CEFDE9DD1CA43F4A00A66716 /* static_sort.h */,
