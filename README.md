@@ -10,7 +10,7 @@ To enable the magic to happen, please turn on optimizations. =)
 Installation
 ------------
 
-Just copy `static_sort.h` into your project and `#include` it. =)  
+Just copy `include/static_sort.h` into your project and `#include` it. =)  
 
 You can also copy and paste the code from `static_sort.h` directly!  
 
